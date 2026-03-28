@@ -1,0 +1,32 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.python-version
+
+# Виртуальное окружение
+.venv/
+venv/
+env/
+ENV/
+
+# FastAPI / Окружение
+.env
+.flaskenv
+
+# База данных (если используешь SQLite локально)
+*.sqlite3
+db.sqlite3
+
+# Логи
+*.log
+
+# Настройки IDE
+.idea/
+.vscode/
+*.swp
+
+# OS файлы
+.DS_Store
+thumbs.db

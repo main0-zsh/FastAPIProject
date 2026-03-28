@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedbacks</title>
+</head>
+<style>
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        gap: 20px;
+    }
+    .feedback-card {
+        width: 100%;
+        max-width: 600px;
+        background: #ffffff;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-left: 5px solid #4a8c2b;
+        border-radius: 5px;
+        padding: 15px;
+        margin-bottom: 10px;
+    }
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #040a04;
+        margin: 0;
+        padding: 20px;
+    }
+    h1 {
+        color: #ffffff;
+        font-size: 36px;
+        text-align: center;
+    }
+    p {
+        color:#000000;
+        font-size: 16px;
+        line-height: 1.5;
+        align-items: center;
+        justify-content: center;
+    }
+    button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+</style>
+<body> 
+    <h1>Feedbacks</h1>
+    <div class="container">
+        {% if not feedbacks %}
+            <div class="feedback-card">
+                <strong>No feedbacks yet...</strong> 
+            </div>
+            <div class="feedback-card">
+                <button class="button" onclick="location.href='/'">На главную</button>
+            </div>
+        {% else %}
+            {% for feedback in feedbacks %}
+                <div class="feedback-card">
+                    <strong class="card-title">{{ feedback.name }} | {{ feedback.email }}</strong>
+                    <p><strong>Сообщение:</strong></p>
+                    <p class="message">{{ feedback.message }}</p>
+                    <button class="button" onclick="location.href='/delete/{{ feedback.id }}'">Удалить</button>
+                </div>
+                <div class="feedback-card">
+                    <button class="button" onclick="location.href='/'">На главную</button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</body>
+</html>
