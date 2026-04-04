@@ -37,7 +37,7 @@ def submit_feedback(name: str=Form(...), email: str=Form(...), message: str=Form
 
 @app.get("/send")
 def send_feedback(request: fastapi.Request):
-    return templates.TemplateResponse(name="form.html", context={"request": request})
+    return templates.TemplateResponse(request=request, name="form.html")
 
 @app.get("/view")
 def view_feedbacks(request: fastapi.Request, db: Session = fastapi.Depends(get_db), credentials: HTTPBasicCredentials = fastapi.Depends(security)):
@@ -49,13 +49,14 @@ def view_feedbacks(request: fastapi.Request, db: Session = fastapi.Depends(get_d
     db.query(models.DataBase).order_by(models.DataBase.id.desc()).all()
 
     return templates.TemplateResponse(
+	request=request,
         name="feedbacks.html", 
-        context={"request": request, "feedbacks": feedbacks}
+        context={"feedbacks": feedbacks}
     )
 
 @app.get("/thank-you")
 def thank_you(request: fastapi.Request):
-    return templates.TemplateResponse(name="thank.html", context={"request": request})
+    return templates.TemplateResponse(request=request, name="thank.html")
 
 @app.get("/delete/{feedback_id}")
 def delete_feedback(feedback_id: int, db: Session = fastapi.Depends(get_db), credentials: HTTPBasicCredentials = fastapi.Depends(security)):
@@ -69,4 +70,4 @@ def delete_feedback(feedback_id: int, db: Session = fastapi.Depends(get_db), cre
 
 @app.get("/")
 def read_root(request: fastapi.Request):
-    return templates.TemplateResponse(name="home.html", context={"request": request})
+    return templates.TemplateResponse(request=request, name="home.html")
